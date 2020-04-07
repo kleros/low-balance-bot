@@ -1,6 +1,6 @@
 {
   "name": "low-balance-bot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A bot to notify when an ethereum wallets's balance falls below a threshold.",
   "main": "index.js",
   "scripts": {
