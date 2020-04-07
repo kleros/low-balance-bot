@@ -23,10 +23,10 @@ const runBots = async () => {
 
   const wallets = JSON.parse(process.env.WALLETS)
 
-  wallets.forEach(({ walletAddress, message, thresholdETH }) =>
+  wallets.forEach(({ address, message, thresholdETH }) =>
     bot({
       provider,
-      walletAddress,
+      walletAddress: address,
       message,
       thresholdETH,
       chainName,

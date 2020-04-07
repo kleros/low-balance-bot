@@ -1,3 +1,7 @@
+const ethers = require('ethers')
+
+const { getAddress } = ethers.utils
+
 // Web3
 if (!process.env.PROVIDER_URL) {
   console.error(
@@ -13,12 +17,18 @@ if (!process.env.WALLETS) {
   process.exit(1)
 }
 
-if (
-  typeof JSON.parse(process.env.WALLETS) !== 'object' ||
-  JSON.parse(process.env.WALLETS) === null
-) {
-  console.error('WALLETS an array of objects. See .env.example an fix it.')
-  process.exit(1)
+try {
+  const wallets = JSON.parse(process.env.WALLETS)
+  if (!Array.isArray(wallets)) {
+    console.error('WALLETS should be an array of objects')
+    process.exit(1)
+  }
+
+  // getAddress will throw if one of the addresses is not a checksummed address.
+  wallets.forEach(({ address }) => getAddress(address))
+} catch (err) {
+  console.error('Error in WALLETS env variable.')
+  throw err
 }
 
 if (!process.env.SENDGRID_API_KEY) {

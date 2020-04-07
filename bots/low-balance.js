@@ -45,17 +45,20 @@ module.exports = async ({
   if (nowHours - lastAlarmTime < period) return
 
   console.info('Wallet balance is below threshold.')
-  console.info('Balance threshold:', process.env.BALANCE_THRESHOLD_ETH, 'ETH')
+  console.info('Balance threshold:', thresholdETH, 'ETH')
 
   await db.put(walletAddress, JSON.stringify(nowHours))
   alarm({
     subject: 'Warning: Wallet is running low on ETH',
-    message: `${message}
+    message: `the wallet ${walletAddress} is running low on ETH.
+    <br>
+    <br>${message}
     <br>
     <br>The bot will stop complaining if the wallet balance is above ${thresholdETH} Ξ.
     <br>Balance when this email was dispatched: ${formatEther(balance)} Ξ.`,
     chainName,
     chainId,
-    templateId: process.env.TEMPLATE_ID
+    templateId: process.env.TEMPLATE_ID,
+    secondary: walletAddress
   })
 }
