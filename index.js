@@ -19,7 +19,8 @@ const runBots = async () => {
   const [network] = await Promise.all([provider.getNetwork()])
 
   const { name: chainName, chainId } = network
-  console.info('Network   :', chainName)
+  console.info('Network:', chainName)
+  console.info('')
 
   const wallets = JSON.parse(process.env.WALLETS)
 
