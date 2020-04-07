@@ -31,6 +31,8 @@ Thi bot will periodically query every address in WALLETS, and if notify if any o
 
 > To start with PM2 use `pm2 start --node-args="-r dotenv/config" index.js --name low-balance-bot`
 
+> If switching networks, remember to clean the database with `yarn clean`.
+
 ## Other Scripts
 
 - `yarn format` - Lint, fix and prettify all the project.
