@@ -1,0 +1,70 @@
+{
+  "name": "low-balance-bot",
+  "version": "0.1.0",
+  "description": "A bot to notify when an ethereum wallets's balance falls below a threshold.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -r dotenv/config index.js",
+    "lint:js": "eslint '**/*.js' --ignore-pattern 'public/ethers.min.js'",
+    "lint": "yarn lint:js",
+    "format": "eslint '**/*.js' --ignore-pattern 'public/ethers.min.js' --fix",
+    "clean": "rimraf ./db/* && nodetouch ./db/.gitkeep",
+    "release": "standard-version"
+  },
+  "author": "Kleros",
+  "license": "MIT",
+  "private": true,
+  "keywords": [
+    "kleros",
+    "bot",
+    "wallet",
+    "balance"
+  ],
+  "dependencies": {
+    "@sendgrid/mail": "^6.5.4",
+    "dotenv": "^8.2.0",
+    "ethers": "^4.0.45",
+    "level": "^6.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-prettier-standard": "^3.0.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-unicorn": "^17.2.0",
+    "husky": "^4.2.3",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "prettier-config-standard": "^1.0.1",
+    "rimraf": "^3.0.2",
+    "standard-version": "^7.1.0",
+    "touch": "^3.1.0"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "/node_modules/**"
+    ],
+    "globals": [
+      "require"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:js",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
