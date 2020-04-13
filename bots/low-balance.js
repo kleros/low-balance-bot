@@ -19,6 +19,8 @@ module.exports = async ({
   let balance
   try {
     balance = await provider.getBalance(walletAddress)
+    console.info('')
+    console.info('Wallet :', walletAddress)
     console.info('Balance:', formatEther(balance), 'Ξ')
   } catch (err) {
     console.error('Error fetching wallet balance.')
