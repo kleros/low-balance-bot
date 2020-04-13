@@ -22,6 +22,7 @@ module.exports = async ({
     console.info('')
     console.info('Wallet :', walletAddress)
     console.info('Balance:', formatEther(balance), 'Ξ')
+    console.info('Limit  :', thresholdETH, 'Ξ')
   } catch (err) {
     console.error('Error fetching wallet balance.')
     throw err
