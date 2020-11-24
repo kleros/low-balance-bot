@@ -19,21 +19,30 @@ module.exports = async ({
   for (const email of Object.keys(emails)) {
     const nickname = emails[email]
     console.info(`Sending out email to ${nickname} at ${email}`)
-    sgMail.send({
-      to: email,
-      from: {
-        email: process.env.FROM_ADDRESS,
-        name: process.env.FROM_NAME
-      },
-      templateId,
-      dynamic_template_data: {
-        subject,
-        message: `${nickname}, ${message}`,
-        chainName,
-        chainId,
-        secondary
-      }
-    })
+    try {
+      await sgMail.send({
+        to: email,
+        from: {
+          email: process.env.FROM_ADDRESS,
+          name: process.env.FROM_NAME
+        },
+        templateId,
+        dynamic_template_data: {
+          subject,
+          message: `${nickname}, ${message}`,
+          chainName,
+          chainId,
+          secondary
+        }
+      })
+      console.info(`Email dispatched to ${nickname} @ ${email}`)
+    } catch (err) {
+      console.error(`Error dispatching email to ${nickname}, ${err.message}`)
+
+      if (err.response) console.error(err.response.body)
+
+      throw err
+    }
   }
   console.info('')
 }
