@@ -47,7 +47,7 @@
     "prettier-config-standard": "^1.0.1",
     "rimraf": "^3.0.2",
     "secretlint": "^2.0.0",
-    "standard-version": "^7.1.0",
+    "standard-version": "^8.0.1",
     "touch": "^3.1.0"
   },
   "standard": {
